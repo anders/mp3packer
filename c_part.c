@@ -18,6 +18,8 @@
 #else
 #include <sys/types.h>
 #include <sys/time.h>
+#include <sys/stat.h>
+#include <unistd.h>
 #endif
 
 
@@ -186,7 +188,7 @@ CAMLprim value get_os_thread_self_id() {
 		out_val = win_alloc_handle(dup_handle);
 	}
 #else
-	out_val = Val_int(gettid());
+	out_val = Val_int(getpid()); // was: gettid
 #endif
 	CAMLreturn(out_val);
 }

@@ -6,6 +6,10 @@
 
 #include <caml/unixsupport.h>
 
+#ifdef __APPLE__
+#include <libkern/OSByteOrder.h>
+#endif
+
 #include "ptr.h"
 
 
@@ -335,7 +339,11 @@ static unsigned int get_bits_wordwise(seq_string_t *s, int num_bits) {
 	int_ptr = (uint32 *)s->byte_ptr;
 
 #if 1
+#ifdef __APPLE__
+	raw = OSSwapConstInt32(*int_ptr) << s->bit_index;
+#else
 	raw = _byteswap_ulong(*int_ptr) << s->bit_index;
+#endif
 #else
 	raw = (
 		(s->byte_ptr[0] << 24) |
