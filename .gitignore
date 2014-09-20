@@ -1,0 +1,8 @@
+*.o
+*.cmi
+*.cmx
+*.i
+*.s
+mp3packer
+mp3packer64
+*.mp3
