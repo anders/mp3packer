@@ -20,6 +20,7 @@
 #include <sys/time.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <pthread.h>
 #endif
 
 
@@ -187,8 +188,12 @@ CAMLprim value get_os_thread_self_id() {
 //		printf("HANDLE IS %p\n", (int)dup_handle);
 		out_val = win_alloc_handle(dup_handle);
 	}
+#elif defined(__APPLE__)
+	uint64_t thread_id;
+	pthread_threadid_np(NULL, &thread_id);
+	out_val = Val_long(thread_id);
 #else
-	out_val = Val_int(getpid()); // was: gettid
+	out_val = Val_int(gettid());
 #endif
 	CAMLreturn(out_val);
 }
