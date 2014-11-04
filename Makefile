@@ -72,7 +72,7 @@ test: depend $(ALLREQS) test.cmx
 
 
 clean:
-	rm -f ./*$O ./*.cmi ./*.cmx ./*.cmo ./*.cma ./*.cmxa ./*.asm ./*.s ./*.i
+	rm -f ./*$O ./*.cmi ./*.cmx ./*.cmo ./*.cma ./*.cmxa ./*.asm ./*.s ./*.i mp3packer mp3packer64
 
 depend:
 	ocamldep *.mli *.ml > .depend
